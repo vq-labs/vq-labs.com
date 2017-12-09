@@ -1,5 +1,5 @@
 # What is it?
-Source files for the VQ-Labs web page vq-labs.com / vq-labs.de / viciqloud.com.
+Source files for the VQ-Labs web page vq-labs.com.
 
 # What is used?
 bootstrap 3, npm, gulp with html/css/js/json/img minify + uglify
@@ -10,7 +10,7 @@ Images, css and other files that do not require pre-processing you will find in 
 
 # How to start?
 ```
-git clone https://github.com/adrianbarwicki/vq-labs.com 
+git clone https://github.com/vq-labs/vq-labs.com 
 
 cd vq-labs.com
 
