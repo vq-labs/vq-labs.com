@@ -1,0 +1,40 @@
+{
+  "name": "vq-labs",
+  "version": "1.0.0",
+  "description": "Web page content for the vqmarketplace.com",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.14.2",
+    "compression": "~1.6.1",
+    "cors": "~2.7.1",
+    "ejs": "~2.3.4",
+    "express": "~4.13.4",
+    "express-ejs-layouts": "~2.0.0",
+    "express-minify": "~0.2.0",
+    "gulp-ejs": "^2.3.0",
+    "gulp-file-include": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-file-include": "^1.2.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-inject": "^4.2.0",
+    "gulp-live-server": "0.0.31",
+    "gulp-minify-ejs": "^1.0.3",
+    "gulp-replace": "^0.5.4",
+    "gulp-replace-task": "^0.11.0",
+    "gulp-watch": "^4.3.11",
+    "run-sequence": "^2.2.0"
+  },
+  "scripts": {
+    "start": "gulp run",
+    "aws-config": "source ~/.bash_profile",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vq-labs/viciqloud.com"
+  },
+  "author": "Adrian Barwicki",
+  "license": "Apache License 2.0"
+}
