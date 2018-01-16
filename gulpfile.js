@@ -7,18 +7,44 @@ const spawn = require('child_process').spawn;
 const fileinclude = require('gulp-file-include');
 const liveServer = require('gulp-live-server');
 const runSequence = require('run-sequence');
+const fs = require('fs');
+const args = require('yargs').argv;
 
-const build = (VQ_TENANT_API_URL, env) => {
+const generateConfig = () => {
+  if (!args.config) {
+    console.log("ERROR: Please provide a config file as an argument!")
+  }
+
+  if (!args.env) {
+    console.log("ERROR: Please provide an environment as an argument!")
+  }
+
+  if(!fs.existsSync(__dirname + args.config)) {
+    console.log("Config file was not found at ", __dirname + args.config);
+    return null;
+  } else {
+   return fs.readFileSync(__dirname + args.config, "utf8");
+  }
+}
+
+if (!generateConfig()) {
+  return;
+}
+
+const config = JSON.parse(generateConfig());
+
+const build = () => {
+
     gulp.src([ 'src/**/index.html' ])
     .pipe(replace({
         patterns: [
             {
                 match: 'VQ_TENANT_API_URL',
-                replacement: VQ_TENANT_API_URL
+                replacement: config[args.env.toUpperCase()]["VQ_LABS_COM"]["API_URL"]
             },
             {
                 match: 'VQ_WEB_ENV',
-                replacement: env
+                replacement: args.env
             }
         ]
     }))
@@ -34,11 +60,11 @@ const build = (VQ_TENANT_API_URL, env) => {
         patterns: [
             {
                 match: 'VQ_TENANT_API_URL',
-                replacement: VQ_TENANT_API_URL
+                replacement: config[args.env.toUpperCase()]["VQ_LABS_COM"]["API_URL"]
             },
             {
                 match: 'VQ_WEB_ENV',
-                replacement: env
+                replacement: args.env
             }
         ]
     }))
@@ -57,24 +83,21 @@ const build = (VQ_TENANT_API_URL, env) => {
 
 gulp.task('run', function(cb) {
     runSequence(
-        'build:local',
-        'watch:local',
+        'build',
+        'watch',
         'runServer',
         cb
     );
 });
 
 gulp.task('runServer', function() {
-    var server = liveServer.static('./public');
+    var server = liveServer.static('./public', config[args.env.toUpperCase()]["VQ_LABS_COM"]["PORT"]);
     server.start();
 });
 
-// production
-gulp.task('build', () => build('https://vqmarketplace.vq-labs.com/api', 'production'));
+gulp.task('build', () => build());
 
-gulp.task('build:dev', () => build('https://vqmarketplace.vqmarketplace.com/api', 'development'));
-
-gulp.task('build:local', () => build('http://localhost:8081/api', 'local'));
+gulp.task('watch', () => gulp.watch('./src/**/**',  [ 'build' ]));
 
 gulp.task('deploy', [ 'build' ], function() {
     const args = [ './**', '--region', 'eu-central-1', '--bucket', 'vq-labs.com', '--gzip' ];
@@ -92,7 +115,3 @@ gulp.task('deploy', [ 'build' ], function() {
         console.log(code !== 0 ? 'error in build' : 0);
     });
 });
-
-gulp.task('watch', () => gulp.watch('./src/**/**',  [ 'build' ]));
-gulp.task('watch:dev', () => gulp.watch('./src/**/**',  [ 'build:dev' ]));
-gulp.task('watch:local', () => gulp.watch('./src/**/**',  [ 'build:local' ]));

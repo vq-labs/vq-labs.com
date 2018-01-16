@@ -23,10 +23,13 @@
     "gulp-replace": "^0.5.4",
     "gulp-replace-task": "^0.11.0",
     "gulp-watch": "^4.3.11",
-    "run-sequence": "^2.2.0"
+    "run-sequence": "^2.2.0",
+    "yargs": "^10.1.1"
   },
   "scripts": {
-    "start": "gulp run",
+    "start": "gulp run --env production --config /../test-config.json",
+    "start:dev": "gulp run --env development --config /../test-config.json",
+    "start:local": "gulp run --env local --config /../test-config.json",
     "aws-config": "source ~/.bash_profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
