@@ -10,18 +10,6 @@ const runSequence = require('run-sequence');
 
 const build = (VQ_TENANT_API_URL, env) => {
     gulp.src([ 'src/**/index.html' ])
-    .pipe(replace({
-        patterns: [
-            {
-                match: 'VQ_TENANT_API_URL',
-                replacement: VQ_TENANT_API_URL
-            },
-            {
-                match: 'VQ_WEB_ENV',
-                replacement: env
-            }
-        ]
-    }))
     .pipe(fileinclude({
       prefix: '@@',
       basepath: '@file'
@@ -30,18 +18,6 @@ const build = (VQ_TENANT_API_URL, env) => {
     .pipe(gulp.dest('public'));
 
     gulp.src([ 'src/**/*.js' ])
-    .pipe(replace({
-        patterns: [
-            {
-                match: 'VQ_TENANT_API_URL',
-                replacement: VQ_TENANT_API_URL
-            },
-            {
-                match: 'VQ_WEB_ENV',
-                replacement: env
-            }
-        ]
-    }))
     .pipe(gulp.dest('public'));
 
   gulp.src([ 'src/**/*.css' ])
