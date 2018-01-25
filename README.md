@@ -23,8 +23,6 @@ npm start
 # Development
 If your environment in .env file is not 'production', then npm start command will automatically watch changes for you.
 
-@todo: to make the above two in one command
-
 # Deployment
 Make sure that you have s3-deploy installed globally:
 ```
