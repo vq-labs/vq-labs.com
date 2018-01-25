@@ -12,10 +12,6 @@ Images, css and other files that do not require pre-processing you will find in 
 Review .env file and make necessary changes first!
 
 ```
-git clone https://github.com/vq-labs/vq-labs.com 
-
-cd vq-labs.com
-
 npm install
 
 npm start
