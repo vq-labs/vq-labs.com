@@ -8,7 +8,6 @@ const spawn = require('child_process').spawn;
 const fileinclude = require('gulp-file-include');
 const liveServer = require('gulp-live-server');
 const runSequence = require('run-sequence');
-const fs = require('fs');
 
 const build = () => {
    gulp.src([ 'src/**/index.html' ])
