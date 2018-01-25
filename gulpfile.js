@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
@@ -8,43 +9,18 @@ const fileinclude = require('gulp-file-include');
 const liveServer = require('gulp-live-server');
 const runSequence = require('run-sequence');
 const fs = require('fs');
-const args = require('yargs').argv;
-
-const generateConfig = () => {
-  if (!args.config) {
-    console.log("ERROR: Please provide a config file as an argument!")
-  }
-
-  if (!args.env) {
-    console.log("ERROR: Please provide an environment as an argument!")
-  }
-
-  if(!fs.existsSync(__dirname + args.config)) {
-    console.log("Config file was not found at ", __dirname + args.config);
-    return null;
-  } else {
-   return fs.readFileSync(__dirname + args.config, "utf8");
-  }
-}
-
-if (!generateConfig()) {
-  return;
-}
-
-const config = JSON.parse(generateConfig());
 
 const build = () => {
-
-    gulp.src([ 'src/**/index.html' ])
+   gulp.src([ 'src/**/index.html' ])
     .pipe(replace({
         patterns: [
             {
-                match: 'VQ_TENANT_API_URL',
-                replacement: config[args.env.toUpperCase()]["VQ_LABS_COM"]["API_URL"]
+                match: 'VQ_API_URL',
+                replacement: process.env.API_URL
             },
             {
                 match: 'VQ_WEB_ENV',
-                replacement: args.env
+                replacement: process.env.ENV
             }
         ]
     }))
@@ -59,12 +35,12 @@ const build = () => {
     .pipe(replace({
         patterns: [
             {
-                match: 'VQ_TENANT_API_URL',
-                replacement: config[args.env.toUpperCase()]["VQ_LABS_COM"]["API_URL"]
+                match: 'VQ_API_URL',
+                replacement: process.env.API_URL
             },
             {
                 match: 'VQ_WEB_ENV',
-                replacement: args.env
+                replacement: process.env.ENV
             }
         ]
     }))
@@ -82,16 +58,24 @@ const build = () => {
 };
 
 gulp.task('run', function(cb) {
-    runSequence(
+  if (process.env.ENV.toLowerCase() === 'production') {
+        runSequence(
+        'build',
+        'runServer',
+        cb
+    );
+  } else {
+        runSequence(
         'build',
         'watch',
         'runServer',
         cb
     );
+  }
 });
 
 gulp.task('runServer', function() {
-    var server = liveServer.static('./public', config[args.env.toUpperCase()]["VQ_LABS_COM"]["PORT"]);
+    var server = liveServer.static('./public', process.env.PORT);
     server.start();
 });
 

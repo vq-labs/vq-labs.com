@@ -7,6 +7,7 @@
     "body-parser": "~1.14.2",
     "compression": "~1.6.1",
     "cors": "~2.7.1",
+    "dotenv": "^4.0.0",
     "express": "~4.13.4",
     "express-ejs-layouts": "~2.0.0",
     "express-minify": "~0.2.0",
@@ -27,9 +28,7 @@
     "yargs": "^10.1.1"
   },
   "scripts": {
-    "start": "gulp run --env production --config /../test-config.json",
-    "start:dev": "gulp run --env development --config /../test-config.json",
-    "start:local": "gulp run --env local --config /../test-config.json",
+    "start": "gulp run",
     "aws-config": "source ~/.bash_profile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

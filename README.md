@@ -9,6 +9,8 @@ All the html sources can be found in the "src" folder. Modify the files in there
 Images, css and other files that do not require pre-processing you will find in the "public" folder.
 
 # How to start?
+Review .env file and make necessary changes first!
+
 ```
 git clone https://github.com/vq-labs/vq-labs.com 
 
@@ -19,15 +21,7 @@ npm install
 npm start
 ```
 # Development
-This will listen for changes under the src/ and will build automatically:
-```
-gulp watch
-```
-
-You can then start a server with for example:
-```
-live-server ./public
-```
+If your environment in .env file is not 'production', then npm start command will automatically watch changes for you.
 
 @todo: to make the above two in one command
 
