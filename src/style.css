@@ -1145,3 +1145,16 @@ ul {
 .font-family-montserrat, .font-family-montserrat input {
     font-family: Montserrat !important;
 }
+
+.img-circular{
+ width: 150px;
+ height: 150px;
+ margin:0 auto;
+ background-size: cover;
+ display: block;
+ border-radius: 100px;
+ -webkit-border-radius: 100px;
+ -moz-border-radius: 100px;
+}
+
+
