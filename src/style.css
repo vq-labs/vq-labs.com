@@ -218,24 +218,6 @@ section {
     color: #546e7a;
   }
 
-.vq-usecases {
-
-    background: url(/images/people.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-.vq-marketplace {
-
-    background: url(/images/buildings.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 .vq-main {
 
 
