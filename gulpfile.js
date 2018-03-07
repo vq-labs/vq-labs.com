@@ -33,18 +33,6 @@ gulp.task('runServer', function () {
 
 gulp.task('build', function () {
   gulp.src(['src/**/index.html'])
-    .pipe(replace({
-      patterns: [
-        {
-          match: 'VQ_API_URL',
-          replacement: process.env.API_URL
-        },
-        {
-          match: 'VQ_WEB_ENV',
-          replacement: process.env.ENV
-        }
-      ]
-    }))
     .pipe(fileinclude({
       prefix: '@@',
       basepath: '@file'
@@ -53,18 +41,6 @@ gulp.task('build', function () {
     .pipe(gulp.dest('public'));
 
   gulp.src(['src/**/*.js'])
-    .pipe(replace({
-      patterns: [
-        {
-          match: 'VQ_API_URL',
-          replacement: process.env.API_URL
-        },
-        {
-          match: 'VQ_WEB_ENV',
-          replacement: process.env.ENV
-        }
-      ]
-    }))
     .pipe(gulp.dest('public'));
 
   gulp.src(['src/**/*.css'])
