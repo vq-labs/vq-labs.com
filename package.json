@@ -7,6 +7,7 @@
     "body-parser": "~1.14.2",
     "compression": "~1.6.1",
     "cors": "~2.7.1",
+    "dotenv": "^4.0.0",
     "express": "~4.13.4",
     "express-ejs-layouts": "~2.0.0",
     "express-minify": "~0.2.0",
@@ -26,13 +27,17 @@
     "run-sequence": "^2.2.0"
   },
   "scripts": {
-    "start": "gulp run",
-    "aws-config": "source ~/.bash_profile",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./node_modules/gulp/bin/gulp.js run",
+    "build": "node ./node_modules/gulp/bin/gulp.js build",
+    "aws-config": "source ~/.bash_profile"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/vq-labs/viciqloud.com"
+  },
+  "engines": {
+    "node": "~8.3.0",
+    "npm": "~5.6.0"
   },
   "author": "Adrian Barwicki",
   "license": "Apache License 2.0"
